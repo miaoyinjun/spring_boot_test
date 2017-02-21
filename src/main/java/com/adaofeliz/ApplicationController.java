@@ -20,7 +20,7 @@ public class ApplicationController {
     @ResponseBody
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String helloWorld() {
-        return "Hello World: Spring-boot Sample Application using Maven";
+        return "2Hello World: Spring-boot Sample Application using Maven";
     }
 
     public static void main(String[] args) throws Exception {
