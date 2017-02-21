@@ -5,4 +5,4 @@ applications:
   instances: 1
   buildpack: java_buildpack_offline
   stack: cflinuxfs2
-  path: spring_boot_test.war
+  path: spring_boot_test.jar
