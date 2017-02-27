@@ -14,7 +14,6 @@ import javax.xml.namespace.QName;
 import javax.xml.rpc.ParameterMode;
 import javax.xml.rpc.ServiceException;
 import javax.xml.rpc.encoding.XMLType;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -33,7 +32,7 @@ public class ApplicationController {
 
     @ResponseBody
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String helloWorld() throws IOException, ServiceException {
+    public String helloWorld() {
 
 //        URL url = new URL("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx");
 //        URLConnection urlcon = url.openConnection();
@@ -50,7 +49,7 @@ public class ApplicationController {
 //        return "Hello World: Spring-boot Sample Application using Maven";
     }
 
-    public static String test() throws RemoteException, ServiceException, MalformedURLException {
+    public static String test()  {
 
         String inputParam = "测试";
         Service service = new Service();
@@ -58,8 +57,22 @@ public class ApplicationController {
         String namespace = "http://tempuri.org/";
 //        String actionUri = "getinfo"; //Action路径
         String op = "getinfo"; //要调用的方法名
-        Call call = (Call) service.createCall();
-        call.setTargetEndpointAddress(new URL(url));
+        Call call = null;
+        String a = "a";
+        String b = "b";
+        String c = "c";
+        try {
+            call = (Call) service.createCall();
+        } catch (ServiceException e) {
+            a += e.getMessage();
+            e.printStackTrace();
+        }
+        try {
+            call.setTargetEndpointAddress(new URL(url));
+        } catch (MalformedURLException e) {
+            b += e.getMessage();
+            e.printStackTrace();
+        }
         call.setUseSOAPAction(true);
 //        call.setSOAPActionURI(namespace + actionUri); // action uri
 //        call.setOperationName(new QName(namespace, op));// 设置要调用哪个方法
@@ -68,8 +81,14 @@ public class ApplicationController {
 //call.setReturnType(new QName(namespace,"getinfo"),Model.class); //设置返回结果为是某个类
         call.setReturnType(org.apache.axis.encoding.XMLType.XSD_STRING);//设置结果返回类型
         Object[] params = new Object[] {inputParam};
-        String result = (String) call.invoke(params); //方法执行后的返回值
+        String result = null; //方法执行后的返回值
+        try {
+            result = (String) call.invoke(params);
+        } catch (RemoteException e) {
+            c += e.getMessage();
+            e.printStackTrace();
+        }
         System.out.println(result);
-        return result;
+        return a+b+c;
     }
 }
