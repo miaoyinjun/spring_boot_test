@@ -54,6 +54,7 @@ public class HttpRequest {
                 result += line;
             }
         } catch (Exception e) {
+            result = e.getMessage();
             System.out.println("发送GET请求出现异常！" + e);
             e.printStackTrace();
         }
