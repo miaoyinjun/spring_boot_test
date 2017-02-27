@@ -7,6 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+
 /**
  * Created on 19/11/14.
  */
@@ -22,9 +30,20 @@ public class ApplicationController {
 
     @ResponseBody
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String helloWorld() {
+    public String helloWorld() throws IOException {
 
-        return HttpRequest.sendGet("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx", null);
+        URL url = new URL("http://www.sina.com.cn");
+        URLConnection urlcon = url.openConnection();
+        InputStream is = urlcon.getInputStream();
+        BufferedReader in = new BufferedReader(new InputStreamReader(
+                urlcon.getInputStream()));
+        String line;
+        String result = "1";
+        while ((line = in.readLine()) != null) {
+            result += line;
+        }
+        return result;
+//        return HttpRequest.sendGet("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx", null);
 //        return "Hello World: Spring-boot Sample Application using Maven";
     }
 
