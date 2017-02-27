@@ -49,14 +49,14 @@ public class ApplicationController {
         System.out.println("Start invoking....");
         try
         {
-            String endPoint="http://www.webxml.com.cn/WebServices/IpAddressSearchWebService.asmx";
+            String endPoint="http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx";
             Service service = new Service();
             Call call = (Call)service.createCall();
             call.setTargetEndpointAddress(new java.net.URL(endPoint));
-            call.setOperation("getVersionTime");
+            call.setOperation("GetMessageCompleted");
             call.setUseSOAPAction(true);
             call.setSOAPActionURI("");
-            call.setOperationName(new QName("www.webxml.com.cn","getVersionTime"));
+            call.setOperationName(new QName("www.webxml.com.cn","GetMessageCompleted"));
             call.setReturnType(org.apache.axis.encoding.XMLType.XSD_STRING);
             str=(String)call.invoke( new Object[]{});
         }catch(Exception e)
