@@ -32,7 +32,7 @@ public class ApplicationController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String helloWorld() throws IOException {
 
-        URL url = new URL("http://www.sina.com.cn");
+        URL url = new URL("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx");
         URLConnection urlcon = url.openConnection();
         InputStream is = urlcon.getInputStream();
         BufferedReader in = new BufferedReader(new InputStreamReader(
