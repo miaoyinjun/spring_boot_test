@@ -11,12 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.xml.namespace.QName;
-import javax.xml.rpc.ParameterMode;
-import javax.xml.rpc.ServiceException;
-import javax.xml.rpc.encoding.XMLType;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.rmi.RemoteException;
 /**
  * Created on 19/11/14.
  */
@@ -50,45 +44,26 @@ public class ApplicationController {
     }
 
     public static String test()  {
+// TODO Auto-generated method stub
+        String str= "";
+        System.out.println("Start invoking....");
+        try
+        {
+            String endPoint="http://www.webxml.com.cn/WebServices/IpAddressSearchWebService.asmx";
+            Service service = new Service();
+            Call call = (Call)service.createCall();
+            call.setTargetEndpointAddress(new java.net.URL(endPoint));
+            call.setOperation("getVersionTime");
+            call.setUseSOAPAction(true);
+            call.setSOAPActionURI("");
+            call.setOperationName(new QName("www.webxml.com.cn","getVersionTime"));
+            call.setReturnType(org.apache.axis.encoding.XMLType.XSD_STRING);
+            str=(String)call.invoke( new Object[]{});
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return str;
 
-        String inputParam = "测试";
-        Service service = new Service();
-        String url = "http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx";  //URL地址
-        String namespace = "http://tempuri.org/";
-//        String actionUri = "getinfo"; //Action路径
-        String op = "getinfo"; //要调用的方法名
-        Call call = null;
-        String a = "a";
-        String b = "b";
-        String c = "c";
-        try {
-            call = (Call) service.createCall();
-        } catch (ServiceException e) {
-            a += e.getMessage();
-            e.printStackTrace();
-        }
-        try {
-            call.setTargetEndpointAddress(new URL(url));
-        } catch (MalformedURLException e) {
-            b += e.getMessage();
-            e.printStackTrace();
-        }
-        call.setUseSOAPAction(true);
-//        call.setSOAPActionURI(namespace + actionUri); // action uri
-//        call.setOperationName(new QName(namespace, op));// 设置要调用哪个方法
-// 设置参数名称，具体参照从浏览器中看到的
-        call.addParameter(new QName(namespace, "GetMessageOperationCompleted"), XMLType.XSD_STRING, ParameterMode.IN);  //设置请求参数及类型
-//call.setReturnType(new QName(namespace,"getinfo"),Model.class); //设置返回结果为是某个类
-        call.setReturnType(org.apache.axis.encoding.XMLType.XSD_STRING);//设置结果返回类型
-        Object[] params = new Object[] {inputParam};
-        String result = null; //方法执行后的返回值
-        try {
-            result = (String) call.invoke(params);
-        } catch (RemoteException e) {
-            c += e.getMessage();
-            e.printStackTrace();
-        }
-        System.out.println(result);
-        return a+b+c;
     }
 }
