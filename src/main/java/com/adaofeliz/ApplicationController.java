@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.xml.namespace.QName;
+
 /**
  * Created on 19/11/14.
  */
@@ -27,31 +28,25 @@ public class ApplicationController {
     @ResponseBody
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String helloWorld() {
-        return HttpRequest.sendGet("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx?WSDL", null);
+        String str = "1";
+//        return HttpRequest.sendGet("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx?WSDL", null);
 //        return "Hello World: Spring-boot Sample Application using Maven";
-    }
-
-    public static String test()  {
-// TODO Auto-generated method stub
-        String str= "";
-        System.out.println("Start invoking....");
-        try
-        {
-            String endPoint="http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx";
+        try {
+            String endPoint = "http://www.webxml.com.cn/WebServices/IpAddressSearchWebService.asmx";
             Service service = new Service();
-            Call call = (Call)service.createCall();
+            Call call = (Call) service.createCall();
             call.setTargetEndpointAddress(new java.net.URL(endPoint));
-            call.setOperation("GetMessageCompleted");
             call.setUseSOAPAction(true);
-            call.setSOAPActionURI("");
-            call.setOperationName(new QName("www.webxml.com.cn","GetMessageCompleted"));
+            call.setSOAPActionURI("http://WebXml.com.cn/getVersionTime");
+            call.setOperationName(new QName("http://WebXml.com.cn/", "getVersionTime"));
             call.setReturnType(org.apache.axis.encoding.XMLType.XSD_STRING);
-            str=(String)call.invoke( new Object[]{});
-        }catch(Exception e)
-        {
+            str = (String) call.invoke(new Object[]{});
+
+        } catch (Exception e) {
+            str = e.getMessage();
             e.printStackTrace();
         }
         return str;
-
     }
+
 }
