@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import javax.xml.namespace.QName;
-
 /**
  * Created on 19/11/14.
  */
@@ -32,13 +30,13 @@ public class ApplicationController {
 //        return HttpRequest.sendGet("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx?WSDL", null);
 //        return "Hello World: Spring-boot Sample Application using Maven";
         try {
-            String endPoint = "http://www.webxml.com.cn/WebServices/IpAddressSearchWebService.asmx";
+            String endPoint = "http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx";
             Service service = new Service();
             Call call = (Call) service.createCall();
             call.setTargetEndpointAddress(new java.net.URL(endPoint));
             call.setUseSOAPAction(true);
-            call.setSOAPActionURI("http://WebXml.com.cn/getVersionTime");
-            call.setOperationName(new QName("http://WebXml.com.cn/", "getVersionTime"));
+//            call.setSOAPActionURI("http://WebXml.com.cn/getVersionTime");
+            call.setOperationName("GetMessage");
             call.setReturnType(org.apache.axis.encoding.XMLType.XSD_STRING);
             str = (String) call.invoke(new Object[]{});
 
