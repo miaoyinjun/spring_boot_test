@@ -30,7 +30,7 @@ public class ApplicationController {
 //        return HttpRequest.sendGet("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx?WSDL", null);
 //        return "Hello World: Spring-boot Sample Application using Maven";
         try {
-            String endPoint = "http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx";
+            String endPoint = "https://scdev3scsw.mkappsdev.com:81/SCS.WS/IDev3_LIPS/LOTService.asmx";
             Service service = new Service();
             Call call = (Call) service.createCall();
             call.setTargetEndpointAddress(new java.net.URL(endPoint));
