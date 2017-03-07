@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import javax.xml.namespace.QName;
 /**
  * Created on 19/11/14.
  */
@@ -26,25 +27,43 @@ public class ApplicationController {
     @ResponseBody
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String helloWorld() {
-        String str = "1";
-//        return HttpRequest.sendGet("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx?WSDL", null);
-//        return "Hello World: Spring-boot Sample Application using Maven";
-        try {
-            String endPoint = "https://scdev3scsw.mkappsdev.com:81/SCS.WS/IDev3_LIPS/LOTService.asmx";
-            Service service = new Service();
-            Call call = (Call) service.createCall();
-            call.setTargetEndpointAddress(new java.net.URL(endPoint));
-            call.setUseSOAPAction(true);
-//            call.setSOAPActionURI("http://WebXml.com.cn/getVersionTime");
-            call.setOperationName("GetMessage");
-            call.setReturnType(org.apache.axis.encoding.XMLType.XSD_STRING);
-            str = (String) call.invoke(new Object[]{});
 
-        } catch (Exception e) {
-            str = e.getMessage();
+//        URL url = new URL("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx");
+//        URLConnection urlcon = url.openConnection();
+//        InputStream is = urlcon.getInputStream();
+//        BufferedReader in = new BufferedReader(new InputStreamReader(
+//                urlcon.getInputStream()));
+//        String line;
+//        String result = "1";
+//        while ((line = in.readLine()) != null) {
+//            result += line;
+//        }
+        return test();
+//        return HttpRequest.sendGet("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx", null);
+//        return "Hello World: Spring-boot Sample Application using Maven";
+    }
+
+    public static String test()  {
+// TODO Auto-generated method stub
+        String str= "";
+        System.out.println("Start invoking....");
+        try
+        {
+            String endPoint="http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx";
+            Service service = new Service();
+            Call call = (Call)service.createCall();
+            call.setTargetEndpointAddress(new java.net.URL(endPoint));
+            call.setOperation("GetMessageCompleted");
+            call.setUseSOAPAction(true);
+            call.setSOAPActionURI("");
+            call.setOperationName(new QName("www.webxml.com.cn","GetMessageCompleted"));
+            call.setReturnType(org.apache.axis.encoding.XMLType.XSD_STRING);
+            str=(String)call.invoke( new Object[]{});
+        }catch(Exception e)
+        {
             e.printStackTrace();
         }
         return str;
-    }
 
+    }
 }
