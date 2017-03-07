@@ -43,6 +43,8 @@ public class ApplicationController {
 //        return "Hello World: Spring-boot Sample Application using Maven";
     }
 
+
+
     public static String test()  {
 // TODO Auto-generated method stub
         String str= "";
@@ -61,6 +63,7 @@ public class ApplicationController {
             str=(String)call.invoke( new Object[]{});
         }catch(Exception e)
         {
+            str = e.getMessage();
             e.printStackTrace();
         }
         return str;
