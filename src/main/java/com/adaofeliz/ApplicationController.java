@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.xml.namespace.QName;
+
 /**
  * Created on 19/11/14.
  */
@@ -44,25 +45,25 @@ public class ApplicationController {
     }
 
 
-
-    public static String test()  {
+    public static String test() {
 // TODO Auto-generated method stub
-        String str= "";
+        String str = "";
         System.out.println("Start invoking....");
-        try
-        {
-            String endPoint="http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx";
+        try {
+            String endPoint = "http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx";
+            String soapaction = "http://scs.mkcorp.com/services/1.0/LOT";
             Service service = new Service();
-            Call call = (Call)service.createCall();
+            Call call = (Call) service.createCall();
             call.setTargetEndpointAddress(new java.net.URL(endPoint));
             call.setOperation("GetMessage");
             call.setUseSOAPAction(true);
             call.setSOAPActionURI("");
-            call.setOperationName(new QName("http://scs.mkcorp.com/services/1.0/LOT","GetMessage"));
+            call.setOperationName(new QName(soapaction, "GetMessage"));
+            call.addParameter(new QName(soapaction, "messageId"), org.apache.axis.encoding.XMLType.XSD_STRING,
+                    javax.xml.rpc.ParameterMode.IN);
             call.setReturnType(org.apache.axis.encoding.XMLType.XSD_STRING);
-            str=(String)call.invoke( new Object[]{});
-        }catch(Exception e)
-        {
+            str = (String) call.invoke(new Object[]{"1"});
+        } catch (Exception e) {
             str = e.getMessage();
             e.printStackTrace();
         }
