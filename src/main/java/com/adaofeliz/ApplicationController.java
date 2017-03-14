@@ -50,7 +50,8 @@ public class ApplicationController {
         String str = "";
         System.out.println("Start invoking....");
         try {
-            String endPoint = "http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx";
+//            String endPoint = "http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx";
+            String endPoint = "https://scdev3scsw.mkappsdev.com:81/SCS.WS/IDev3_LIPS/LOTService.asmx";
             String soapaction = "http://scs.mkcorp.com/services/1.0/LOT";
             Service service = new Service();
             Call call = (Call) service.createCall();
