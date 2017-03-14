@@ -39,8 +39,8 @@ public class ApplicationController {
 //        while ((line = in.readLine()) != null) {
 //            result += line;
 //        }
-        return test();
-//        return HttpRequest.sendGet("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx", null);
+//        return test();
+        return HttpRequest.sendGet("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx", null);
 //        return "Hello World: Spring-boot Sample Application using Maven";
     }
 
@@ -50,8 +50,7 @@ public class ApplicationController {
         String str = "";
         System.out.println("Start invoking....");
         try {
-//            String endPoint = "http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx";
-            String endPoint = "https://scdev3scsw.mkappsdev.com:81/SCS.WS/IDev3_LIPS/LOTService.asmx";
+            String endPoint = "http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx";
             String soapaction = "http://scs.mkcorp.com/services/1.0/LOT";
             Service service = new Service();
             Call call = (Call) service.createCall();
