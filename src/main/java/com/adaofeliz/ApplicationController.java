@@ -55,10 +55,10 @@ public class ApplicationController {
             Service service = new Service();
             Call call = (Call)service.createCall();
             call.setTargetEndpointAddress(new java.net.URL(endPoint));
-            call.setOperation("GetMessageCompleted");
+            call.setOperation("GetMessage");
             call.setUseSOAPAction(true);
             call.setSOAPActionURI("");
-            call.setOperationName(new QName("www.webxml.com.cn","GetMessageCompleted"));
+            call.setOperationName(new QName("http://scs.mkcorp.com/services/1.0/LOT","GetMessage"));
             call.setReturnType(org.apache.axis.encoding.XMLType.XSD_STRING);
             str=(String)call.invoke( new Object[]{});
         }catch(Exception e)
