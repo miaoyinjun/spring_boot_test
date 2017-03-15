@@ -39,8 +39,8 @@ public class ApplicationController {
 //        while ((line = in.readLine()) != null) {
 //            result += line;
 //        }
-//        return test();
-        return HttpRequest.sendGet("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx", null);
+        return test();
+//        return HttpRequest.sendGet("http://wddcsdbws85:81/scs.ws/icfg4_lips/LOTService.asmx", null);
 //        return "Hello World: Spring-boot Sample Application using Maven";
     }
 
